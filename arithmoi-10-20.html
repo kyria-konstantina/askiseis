@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Οι αριθμοί από το 10 μέχρι το 20</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fff8f0;--card:#ffffff;--ink:#2a2233;--soft:#6b5f73;--accent:#e2574c;--line:#2a2233;--box:#5b9bd5;--ok:#2a9d5c;--okbg:#e3f6ea;--no:#d9480f;--nobg:#fde9e1;--field:#ffffff;--hl:#fbe3d6;
+--r16:#fbe3d6;--r17:#e3f0dc;--r18:#dbe5f5;--r19:#fdf2cc;--r20:#dcdcdc;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1d1922;--card:#28232f;--ink:#f1ecf5;--soft:#b9adc2;--accent:#ff7a6e;--line:#8d8297;--box:#7fb4e6;--ok:#5fd394;--okbg:#173a2a;--no:#ff8a5c;--nobg:#45251a;--field:#1d1922;--hl:#4a3328;
+--r16:#4a3328;--r17:#2f4229;--r18:#2b3650;--r19:#4a4222;--r20:#3d3d3d;}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1d1922;--card:#28232f;--ink:#f1ecf5;--soft:#b9adc2;--accent:#ff7a6e;--line:#8d8297;--box:#7fb4e6;--ok:#5fd394;--okbg:#173a2a;--no:#ff8a5c;--nobg:#45251a;--field:#1d1922;--hl:#4a3328;
+--r16:#4a3328;--r17:#2f4229;--r18:#2b3650;--r19:#4a4222;--r20:#3d3d3d;}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Comfortaa","Trebuchet MS",Arial,sans-serif}
+main{max-width:880px;margin:16px auto;padding:22px 18px 30px;background:var(--card);border:4px solid var(--line);border-radius:18px}
+h1{text-align:center;font-size:1.6rem;margin:4px 0 0}
+.sub{text-align:center;color:var(--accent);font-size:1.4rem;font-weight:700;margin:4px 0 14px}
+h2.q{font-size:1.15rem;margin:26px 0 12px}
+input.n{font:inherit;font-size:1.5rem;font-weight:700;width:100%;height:52px;text-align:center;border:0;background:transparent;color:var(--ink);padding:0}
+input.n:focus-visible{outline:3px solid var(--box);outline-offset:-3px;border-radius:6px}
+input.n:disabled{opacity:1}
+.ok input.n,input.n.ok{color:var(--ok)}
+.no input.n,input.n.no{color:var(--no)}
+td.ok,.cell.ok{background:var(--okbg)!important}
+td.no,.cell.no{background:var(--nobg)!important}
+.fix{display:block;font-size:.8rem;font-weight:700;color:var(--ok)}
+.wrap{overflow-x:auto}
+table.write{border-collapse:collapse;min-width:520px;width:100%}
+table.write td{border:3px solid var(--line);width:13%;padding:0}
+table.write td.lab{font-size:1.5rem;font-weight:700;text-align:center;width:10%}
+.frames{display:grid;grid-template-columns:repeat(10,1fr);gap:8px}
+.frame{border:5px double var(--soft);border-radius:10px;min-height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px}
+.frame.given{font-size:1.6rem;font-weight:700}
+.trip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;border:3px solid var(--line)}
+.three>div{border-right:3px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+.three>div:last-child{border-right:0}
+.three .mid{background:var(--hl);font-size:1.5rem;font-weight:700;text-align:center;align-items:center}
+.cmp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 10px}
+.pair{display:flex;align-items:center;justify-content:center;gap:10px;font-size:1.7rem;font-weight:700}
+.sym{display:flex;flex-direction:column;align-items:center;gap:4px}
+.slot{width:56px;height:56px;border:3px solid var(--box);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--accent)}
+.slot.ok{border-color:var(--ok);color:var(--ok);background:var(--okbg)}
+.slot.no{border-color:var(--no);color:var(--no);background:var(--nobg)}
+.pick{display:flex;gap:4px}
+.pick button{font:inherit;font-weight:700;font-size:1.1rem;width:34px;height:34px;border:2px solid var(--box);border-radius:8px;background:var(--field);color:var(--ink);cursor:pointer}
+.pick button:focus-visible{outline:3px solid var(--ink);outline-offset:1px}
+.score{text-align:center;font-size:1.3rem;font-weight:700;margin-top:20px;min-height:1.5em}
+.actions{text-align:center;margin-top:18px}
+.intro{text-align:center;padding:10px 0 4px}
+.intro h2{margin:0 0 12px;font-size:1.5rem}
+.intro input{font:inherit;font-size:1.3rem;padding:10px 14px;border:3px solid var(--accent);border-radius:12px;background:var(--field);color:var(--ink);width:min(280px,90%);text-align:center}
+.intro input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.big{font:inherit;font-weight:700;font-size:1.1rem;background:var(--ink);color:var(--card);border:0;border-radius:12px;padding:11px 26px;cursor:pointer;margin-top:12px}
+.big:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.err{color:var(--no);font-weight:700;min-height:1.3em;margin:8px 0 0}
+.hello{text-align:center;color:var(--soft);margin:0 0 14px}
+.saved{text-align:center;font-weight:700;color:var(--soft);min-height:1.3em;margin:6px 0 0}
+
+@media (max-width:700px){.frames{grid-template-columns:repeat(5,1fr)}.trip,.cmp{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.trip,.cmp{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>Μαθηματικά 3η Ενότητα</h1>
+<p class="sub">17. Οι αριθμοί από το 10 μέχρι το 20</p>
+<section class="intro" id="intro">
+<h2>Πώς σε λένε;</h2>
+<input id="nameIn" maxlength="30" autocomplete="off" aria-label="Το όνομά σου" placeholder="Το όνομά σου">
+<br><button class="big" id="go">Ξεκίνα!</button>
+<p class="err" id="nameErr" aria-live="polite"></p>
+</section>
+<section id="play" hidden>
+<p class="hello" id="hello"></p>
+<h2 class="q">1. Γράφω τους αριθμούς από το 16 έως το 20.</h2>
+<div class="wrap"><table class="write"><tbody id="t1"></tbody></table></div>
+<h2 class="q">2. Γράφω τους αριθμούς από το 1 έως το 20.</h2>
+<div class="frames" id="t2"></div>
+<h2 class="q">3. Βρίσκω τον προηγούμενο και τον επόμενο αριθμό.</h2>
+<div class="trip" id="t3"></div>
+<h2 class="q">4. Βάζω το σωστό σύμβολο <span style="color:var(--accent)">&lt; , &gt; , =</span></h2>
+<div class="cmp" id="t4"></div>
+<div class="actions"><button class="big" id="check">✔ Έλεγχος</button></div>
+<p class="score" id="score" aria-live="polite"></p>
+<p class="saved" id="saved" aria-live="polite"></p>
+<div class="actions"><button class="big" id="again" hidden>Παίξε ξανά</button></div>
+</section>
+</main>
+<script src="config.js"></script>
+<script>
+const EX="Οι αριθμοί από το 10 μέχρι το 20";
+const MID=[15,17,19,13,10,16];
+const CMP=[[14,12],[15,13],[20,19],[13,17],[18,18],[10,11]];
+let player="",attempt=0,t0=0;
+const $=id=>document.getElementById(id);
+try{player=localStorage.getItem("player")||""}catch(e){}
+$("nameIn").value=player;
+function begin(){
+ const n=$("nameIn").value.trim();
+ if(!n){$("nameErr").textContent="Γράψε πρώτα το όνομά σου.";$("nameIn").focus();return;}
+ player=n;try{localStorage.setItem("player",n)}catch(e){}
+ $("intro").hidden=true;$("play").hidden=false;$("hello").textContent="Καλή επιτυχία, "+n+"! 🍀";
+ build();
+}
+$("go").onclick=begin;
+$("nameIn").addEventListener("keydown",e=>{if(e.key==="Enter")begin();});
+function nextAttempt(){
+ const k="att_"+EX+"_"+player;let n=attempt;
+ try{n=parseInt(localStorage.getItem(k)||"0",10)||0;localStorage.setItem(k,String(n+1))}catch(e){}
+ return n+1;
+}
+function send(score,total,mistakes){
+ const s=Math.round((Date.now()-t0)/1000),st=$("saved");
+ if(typeof SHEET_URL==="undefined"||!String(SHEET_URL).startsWith("https://script.google.com")){
+  st.textContent="⚠️ Τα αποτελέσματα δεν αποθηκεύτηκαν (λείπει η σύνδεση με το Google Sheet).";return;}
+ st.textContent="Αποθήκευση…";
+ fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},
+  body:JSON.stringify({name:player,exercise:EX,attempt:attempt,score:score+"/"+total,
+   mistakes:mistakes.length?mistakes.join("; "):"κανένα",time:Math.floor(s/60)+"΄ "+(s%60)+"΄΄"})})
+ .then(()=>st.textContent="✔ Τα αποτελέσματα στάλθηκαν στη δασκάλα σου!")
+ .catch(()=>st.textContent="⚠️ Δεν στάλθηκαν. Έλεγξε τη σύνδεση στο internet και παίξε ξανά.");
+}
+
+let items=[];
+function num(label,ans,cell){const i=document.createElement("input");i.className="n";i.inputMode="numeric";i.maxLength=2;i.autocomplete="off";i.setAttribute("aria-label",label);
+ i.addEventListener("input",()=>{i.value=i.value.replace(/\D/g,"")});
+ items.push({kind:"n",i,ans:String(ans),label,cell});return i;}
+function build(){
+ attempt=nextAttempt();t0=Date.now();items=[];
+ $("score").textContent="";$("saved").textContent="";$("again").hidden=true;$("check").hidden=false;
+ const t1=$("t1");t1.innerHTML="";
+ [16,17,18,19,20].forEach(n=>{const tr=document.createElement("tr");tr.innerHTML=`<td class="lab" style="background:var(--r${n})">${n}</td>`;
+  for(let k=1;k<=6;k++){const td=document.createElement("td");td.appendChild(num("Άσκ.1 γραμμή "+n+" κουτί "+k,n,td));tr.appendChild(td);}t1.appendChild(tr);});
+ const t2=$("t2");t2.innerHTML='<div class="frame given">1</div>';
+ for(let n=2;n<=20;n++){const d=document.createElement("div");d.className="frame cell";d.appendChild(num("Άσκ.2 θέση "+n,n,d));t2.appendChild(d);}
+ const t3=$("t3");t3.innerHTML="";
+ MID.forEach(m=>{const w=document.createElement("div");w.className="three";
+  const a=document.createElement("div");a.className="cell";a.appendChild(num("Άσκ.3 πριν από το "+m,m-1,a));
+  const b=document.createElement("div");b.className="mid";b.textContent=m;
+  const c=document.createElement("div");c.className="cell";c.appendChild(num("Άσκ.3 μετά από το "+m,m+1,c));
+  w.append(a,b,c);t3.appendChild(w);});
+ const t4=$("t4");t4.innerHTML="";
+ CMP.forEach(([x,y])=>{const p=document.createElement("div");p.className="pair";
+  const ans=x>y?">":x<y?"<":"=";
+  const sym=document.createElement("div");sym.className="sym";
+  const slot=document.createElement("div");slot.className="slot";slot.setAttribute("aria-live","polite");
+  const pk=document.createElement("div");pk.className="pick";
+  const it={kind:"s",slot,pk,ans,val:"",label:"Άσκ.4 "+x+" _ "+y};
+  ["<",">","="].forEach(s=>{const b=document.createElement("button");b.textContent=s;b.setAttribute("aria-label","Βάλε "+s+" ανάμεσα στο "+x+" και στο "+y);b.onclick=()=>{it.val=s;slot.textContent=s;};pk.appendChild(b);});
+  sym.append(slot,pk);p.innerHTML=`<span>${x}</span>`;p.appendChild(sym);p.insertAdjacentHTML("beforeend",`<span>${y}</span>`);
+  items.push(it);t4.appendChild(p);});
+}
+$("check").onclick=()=>{
+ let right=0;const wrong=[];
+ items.forEach(it=>{
+  if(it.kind==="n"){const v=it.i.value.trim(),good=v===it.ans;it.i.disabled=true;it.cell.classList.add(good?"ok":"no");
+   if(good)right++;else{wrong.push(it.label+": «"+(v||"κενό")+"» → "+it.ans);const f=document.createElement("span");f.className="fix";f.textContent=it.ans;it.cell.appendChild(f);}}
+  else{const good=it.val===it.ans;it.pk.remove();it.slot.classList.add(good?"ok":"no");
+   if(good)right++;else{wrong.push(it.label+": «"+(it.val||"κενό")+"» → "+it.ans);it.slot.textContent=it.ans;it.slot.title="Έγραψες: "+(it.val||"τίποτα");}}
+ });
+ $("check").hidden=true;$("again").hidden=false;
+ $("score").textContent=`Βρήκες ${right} από ${items.length} σωστά! ${right===items.length?"🏆":"👏"}`;
+ send(right,items.length,wrong);
+};
+$("again").onclick=build;
+</script>
+</body>
+</html>
