@@ -31,6 +31,9 @@ h1{text-align:center;font-size:1.8rem;margin:6px 0 4px}
 .score{text-align:center;font-size:1.3rem;font-weight:700;margin-top:20px;min-height:1.5em}
 .actions{text-align:center}
 .again{font:inherit;font-weight:700;background:var(--ink);color:var(--card);border:0;border-radius:12px;padding:10px 22px;cursor:pointer;margin-top:8px}
+.report{display:none;margin:18px auto 0;max-width:460px;border:3px dashed var(--frame);border-radius:16px;padding:14px;text-align:center}
+.report textarea{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:var(--btn);border:1px solid var(--frame);border-radius:10px;padding:8px;resize:none}
+.code{font-size:1.7rem;font-weight:700;letter-spacing:2px;margin:4px 0 8px}
 @media (max-width:620px){.grid{grid-template-columns:1fr}main{border-width:7px}}
 @media (prefers-reduced-motion:reduce){.choice button:hover{transform:none}}
 </style>
@@ -41,13 +44,14 @@ h1{text-align:center;font-size:1.8rem;margin:6px 0 4px}
 <p class="lead">Πάτησε <b>τον</b> για έναν (ενικός) ή <b>των</b> για πολλούς (πληθυντικός, λέξεις σε <b>-ων</b>).</p>
 <div class="grid" id="grid"></div>
 <p class="score" id="score" aria-live="polite"></p>
+<div class="report" id="report"><p><b>📝 Το δελτίο σου</b><br>Πάτησε «Αντιγραφή» και επικόλλησέ το στην απάντηση της εργασίας.</p><textarea id="repText" rows="7" readonly></textarea><p>Ή γράψε αυτόν τον κωδικό στην απάντηση:</p><div class="code" id="repCode"></div><button class="again" id="copyBtn" onclick="copyRep()">📋 Αντιγραφή</button></div>
 <div class="actions"><button class="again" id="again" hidden>Παίξε ξανά</button></div>
 </main>
 <script>
 const W=[["γιατρό","τον"],["χαλιών","των"],["πίνακα","τον"],["καφέ","τον"],["τροχό","τον"],["μελανιών","των"],["μολυβιών","των"],["βιβλίων","των"],["χαρτιών","των"],["χάρτη","τον"],["κάδο","τον"],["άνθρωπο","τον"],["σάκων","των"],["δάσκαλο","τον"],["χάρακα","τον"],["μπαμπά","τον"],["αετών","των"],["κυριών","των"],["μελιών","των"],["μάγειρα","τον"]];
-let done=0,right=0;
+let done=0,right=0,attempt=0,first=null,start=0,wrong=[];
 function build(){
- const g=document.getElementById("grid");g.innerHTML="";done=0;right=0;
+ const g=document.getElementById("grid");g.innerHTML="";done=0;right=0;attempt++;start=Date.now();wrong=[];document.getElementById("report").style.display="none";
  document.getElementById("score").textContent="";document.getElementById("again").hidden=true;
  W.forEach(([w,a])=>{
   const d=document.createElement("div");d.className="item";
@@ -58,12 +62,17 @@ function build(){
    slot.textContent=ok?a:a+" ✗";
    d.classList.add(ok?"ok":"no");
    if(!ok)slot.title="Η σωστή απάντηση είναι: "+a;
-   ch.remove();done++;if(ok)right++;
-   if(done===W.length){document.getElementById("score").textContent=`Βρήκες ${right} από ${W.length} σωστά! ${right===W.length?"🏆":"👏"}`;document.getElementById("again").hidden=false;}
+   ch.remove();done++;if(ok)right++;else wrong.push(w);
+   if(done===W.length){document.getElementById("score").textContent=`Βρήκες ${right} από ${W.length} σωστά! ${right===W.length?"🏆":"👏"}`;document.getElementById("again").hidden=false;showReport("τον ή των",W.length);}
   });
   g.appendChild(d);
  });
 }
+function showReport(name,total){if(first===null)first=right;const s=Math.round((Date.now()-start)/1000),d=new Date();
+ document.getElementById("repText").value=`Άσκηση: ${name}\nΣκορ: ${right}/${total}\n1η προσπάθεια: ${first}/${total}\nΠροσπάθειες: ${attempt}\nΛάθη: ${wrong.length?wrong.join(", "):"κανένα"}\nΧρόνος: ${Math.floor(s/60)}΄ ${s%60}΄΄\nΗμερομηνία: ${d.toLocaleDateString("el-GR")}, ${d.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})}`;
+ document.getElementById("repCode").textContent=`${right}-${first}-${attempt}`;
+ document.getElementById("copyBtn").textContent="📋 Αντιγραφή";document.getElementById("report").style.display="block";}
+function copyRep(){const t=document.getElementById("repText");t.select();try{navigator.clipboard.writeText(t.value)}catch(e){}try{document.execCommand("copy")}catch(e){}document.getElementById("copyBtn").textContent="Αντιγράφηκε! ✔";}
 document.getElementById("again").onclick=build;build();
 </script>
 </body>

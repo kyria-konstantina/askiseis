@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Διάλεξε τα σωστά χρήματα</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef7ff;--card:#ffffff;--ink:#1d3557;--soft:#5b6f8a;--line:#c7d8ea;--ok:#2a9d5c;--okbg:#e3f6ea;--no:#d9480f;--nobg:#fde9e1;--tag:#fff3c4;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#13202f;--card:#1c2d40;--ink:#e8f1fb;--soft:#a9bbd0;--line:#33496274;--ok:#5fd394;--okbg:#173a2a;--no:#ff8a5c;--nobg:#45251a;--tag:#4a4222;}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#13202f;--card:#1c2d40;--ink:#e8f1fb;--soft:#a9bbd0;--line:#334962;--ok:#5fd394;--okbg:#173a2a;--no:#ff8a5c;--nobg:#45251a;--tag:#4a4222;}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Comfortaa","Trebuchet MS",Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:20px 14px 40px}
+h1{font-size:1.7rem;margin:4px 0 6px}
+.lead{color:var(--soft);margin:0 0 20px;font-size:1.05rem;line-height:1.5}
+.row{display:grid;grid-template-columns:130px 1fr;gap:12px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px;margin-bottom:14px}
+.item{text-align:center}
+.emoji{font-size:2.8rem;line-height:1}
+.price{display:inline-block;margin-top:6px;background:var(--tag);border:2px solid var(--ink);border-radius:10px;padding:3px 10px;font-weight:700;font-size:1.15rem}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+button.opt{font:inherit;color:inherit;background:transparent;border:2px dashed var(--line);border-radius:14px;padding:10px 6px;min-height:96px;cursor:pointer;display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-content:center;transition:transform .12s}
+button.opt:hover:not(:disabled){transform:scale(1.04);border-color:var(--ink)}
+button.opt:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+button.opt.ok{border:3px solid var(--ok);background:var(--okbg)}
+button.opt.no{border:3px solid var(--no);background:var(--nobg)}
+button.opt:disabled{cursor:default}
+.c{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;font-weight:700;color:#1d1d1d;font-size:.8rem}
+.e1{width:44px;height:44px;background:#c9ccd1;border:5px solid #e3b94a}
+.e2{width:48px;height:48px;background:#e3b94a;border:5px solid #c9ccd1}
+.l50{width:40px;height:40px;background:#e3b94a}
+.l20{width:37px;height:37px;background:#e3b94a}
+.l5{width:31px;height:31px;background:#c87533;color:#fff}
+.n{display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-weight:700;color:#1d1d1d;height:40px}
+.n5{width:68px;background:#b9c7d6;border:2px solid #7a8da3}
+.n10{width:76px;background:#f0a8a0;border:2px solid #b5655c}
+.msg{grid-column:1/-1;min-height:1.4em;margin:0;font-weight:700;text-align:center}
+.msg.ok{color:var(--ok)}.msg.no{color:var(--no)}
+.score{text-align:center;font-size:1.3rem;font-weight:700;margin-top:18px}
+.again{display:block;margin:12px auto 0;font:inherit;font-weight:700;font-size:1rem;background:var(--ink);color:var(--bg);border:0;border-radius:12px;padding:10px 22px;cursor:pointer}
+.report{display:none;margin:18px auto 0;max-width:460px;border:3px dashed var(--line);border-radius:16px;padding:14px;text-align:center;background:var(--card)}
+.report textarea{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px;resize:none}
+.code{font-size:1.7rem;font-weight:700;letter-spacing:2px;margin:4px 0 8px}
+@media (max-width:560px){.row{grid-template-columns:1fr}.opts{gap:6px}button.opt{min-height:84px}}
+@media (prefers-reduced-motion:reduce){button.opt{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>💶 Διάλεξε τα σωστά χρήματα</h1>
+<p class="lead">Κοίτα την τιμή και πάτησε το κουτάκι με <b>ακριβώς</b> τα σωστά χρήματα.</p>
+<div id="game"></div>
+<p class="score" id="score" aria-live="polite"></p>
+<div class="report" id="report"><p><b>📝 Το δελτίο σου</b><br>Πάτησε «Αντιγραφή» και επικόλλησέ το στην απάντηση της εργασίας.</p><textarea id="repText" rows="7" readonly></textarea><p>Ή γράψε αυτόν τον κωδικό στην απάντηση:</p><div class="code" id="repCode"></div><button class="again" id="copyBtn" onclick="copyRep()">📋 Αντιγραφή</button></div>
+<button class="again" id="again" hidden>Παίξε ξανά</button>
+</main>
+<script>
+const coin={"1":'<span class="c e1">1€</span>',"2":'<span class="c e2">2€</span>',"50":'<span class="c l50">50λ</span>',"20":'<span class="c l20">20λ</span>',"5c":'<span class="c l5">5λ</span>',"5n":'<span class="n n5">5 €</span>',"10n":'<span class="n n10">10 €</span>'};
+const Q=[
+ {e:"📒",p:"1,50 €",o:[["1","20","20"],["1","50"],["1","5c"]],a:1},
+ {e:"⚽",p:"3,00 €",o:[["2","2"],["2","20","50"],["1","1","1"]],a:2},
+ {e:"🧩",p:"6,00 €",o:[["5n","1"],["2","2","1"],["1","1","1","1","1"]],a:0},
+ {e:"🖍️",p:"4,50 €",o:[["2","2"],["2","2","50"],["1","1","1","1"]],a:1},
+ {e:"🎁",p:"9,00 €",o:[["5n","1","1","1"],["10n"],["5n","1","1","2"]],a:2}
+];
+const L=["Α","Β","Γ"];let done=0,right=0,attempt=0,first=null,start=0,wrong=[];
+function build(){
+ const g=document.getElementById("game");g.innerHTML="";done=0;right=0;attempt++;start=Date.now();wrong=[];document.getElementById("report").style.display="none";
+ document.getElementById("score").textContent="";document.getElementById("again").hidden=true;
+ Q.forEach((q,i)=>{
+  const r=document.createElement("div");r.className="row";
+  r.innerHTML=`<div class="item"><div class="emoji">${q.e}</div><span class="price">${q.p}</span></div><div class="opts"></div><p class="msg" aria-live="polite"></p>`;
+  const box=r.querySelector(".opts"),msg=r.querySelector(".msg");
+  q.o.forEach((set,j)=>{
+   const b=document.createElement("button");b.className="opt";b.setAttribute("aria-label","Επιλογή "+L[j]);
+   b.innerHTML=set.map(k=>coin[k]).join("");
+   b.onclick=()=>{
+    box.querySelectorAll("button").forEach(x=>x.disabled=true);
+    if(j===q.a){b.classList.add("ok");msg.textContent="Μπράβο! Σωστά! 🌟";msg.className="msg ok";right++;}
+    else{wrong.push(q.p);b.classList.add("no");box.children[q.a].classList.add("ok");msg.textContent="Όχι ακριβώς. Το σωστό είναι το πράσινο κουτάκι.";msg.className="msg no";}
+    done++;if(done===Q.length){document.getElementById("score").textContent=`Βρήκες ${right} από ${Q.length} σωστά! ${right===Q.length?"🏆":"👏"}`;document.getElementById("again").hidden=false;showReport("Διάλεξε τα σωστά χρήματα",Q.length);}
+   };
+   box.appendChild(b);
+  });
+  g.appendChild(r);
+ });
+}
+function showReport(name,total){if(first===null)first=right;const s=Math.round((Date.now()-start)/1000),d=new Date();
+ document.getElementById("repText").value=`Άσκηση: ${name}\nΣκορ: ${right}/${total}\n1η προσπάθεια: ${first}/${total}\nΠροσπάθειες: ${attempt}\nΛάθη: ${wrong.length?wrong.join(", "):"κανένα"}\nΧρόνος: ${Math.floor(s/60)}΄ ${s%60}΄΄\nΗμερομηνία: ${d.toLocaleDateString("el-GR")}, ${d.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})}`;
+ document.getElementById("repCode").textContent=`${right}-${first}-${attempt}`;
+ document.getElementById("copyBtn").textContent="📋 Αντιγραφή";document.getElementById("report").style.display="block";}
+function copyRep(){const t=document.getElementById("repText");t.select();try{navigator.clipboard.writeText(t.value)}catch(e){}try{document.execCommand("copy")}catch(e){}document.getElementById("copyBtn").textContent="Αντιγράφηκε! ✔";}
+document.getElementById("again").onclick=build;build();
+</script>
+</body>
+</html>
