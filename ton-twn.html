@@ -8,32 +8,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
---bg:#e9f8f4;--card:#ffffff;--ink:#17324d;--soft:#4d6680;--frame:#2bb3c9;--lime:#b5d334;--ok:#2a9d5c;--okbg:#e3f6ea;--no:#d9480f;--nobg:#fde9e1;--btn:#f2f7fb;}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#10222a;--card:#1a3039;--ink:#e6f3f7;--soft:#a3c0cc;--frame:#2a93a6;--lime:#8ea62a;--ok:#5fd394;--okbg:#173a2a;--no:#ff8a5c;--nobg:#45251a;--btn:#24414c;}}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#10222a;--card:#1a3039;--ink:#e6f3f7;--soft:#a3c0cc;--frame:#2a93a6;--lime:#8ea62a;--ok:#5fd394;--okbg:#173a2a;--no:#ff8a5c;--nobg:#45251a;--btn:#24414c;}
+--bg:#e9f8f4;--card:#ffffff;--ink:#17324d;--soft:#4d6680;--accent:#2bb3c9;--lime:#b5d334;--ok:#2a9d5c;--okbg:#e3f6ea;--no:#d9480f;--nobg:#fde9e1;--field:#f2f7fb;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#10222a;--card:#1a3039;--ink:#e6f3f7;--soft:#a3c0cc;--accent:#2a93a6;--lime:#8ea62a;--ok:#5fd394;--okbg:#173a2a;--no:#ff8a5c;--nobg:#45251a;--field:#24414c;}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#10222a;--card:#1a3039;--ink:#e6f3f7;--soft:#a3c0cc;--accent:#2a93a6;--lime:#8ea62a;--ok:#5fd394;--okbg:#173a2a;--no:#ff8a5c;--nobg:#45251a;--field:#24414c;}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Comfortaa","Trebuchet MS",Arial,sans-serif}
-main{max-width:820px;margin:16px auto;padding:22px 18px 30px;background:var(--card);border:10px solid var(--frame);outline:6px solid var(--lime);outline-offset:-16px;border-radius:22px}
+main{max-width:820px;margin:16px auto;padding:22px 18px 30px;background:var(--card);border:10px solid var(--accent);outline:6px solid var(--lime);outline-offset:-16px;border-radius:22px}
 h1{text-align:center;font-size:1.8rem;margin:6px 0 4px}
-.lead{text-align:center;color:var(--soft);margin:0 0 18px;line-height:1.5}
+.lead{text-align:center;color:var(--soft);margin:0 0 10px;line-height:1.5}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
 .item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:14px}
 .item.ok{background:var(--okbg)}.item.no{background:var(--nobg)}
-.slot{min-width:56px;text-align:center;font-weight:700;font-size:1.25rem;border-bottom:3px dotted var(--frame);padding-bottom:2px}
+.slot{min-width:56px;text-align:center;font-weight:700;font-size:1.25rem;border-bottom:3px dotted var(--accent);padding-bottom:2px}
 .item.ok .slot{color:var(--ok);border-color:var(--ok)}
 .item.no .slot{color:var(--no);border-color:var(--no)}
 .word{font-size:1.35rem;font-weight:700;flex:1}
 .choice{display:flex;gap:6px}
-.choice button{font:inherit;font-weight:700;font-size:1rem;color:var(--ink);background:var(--btn);border:2px solid var(--frame);border-radius:10px;padding:6px 10px;cursor:pointer;min-width:52px}
+.choice button{font:inherit;font-weight:700;font-size:1rem;color:var(--ink);background:var(--field);border:2px solid var(--accent);border-radius:10px;padding:6px 10px;cursor:pointer;min-width:52px}
 .choice button:hover{transform:scale(1.06)}
 .choice button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .score{text-align:center;font-size:1.3rem;font-weight:700;margin-top:20px;min-height:1.5em}
 .actions{text-align:center}
-.again{font:inherit;font-weight:700;background:var(--ink);color:var(--card);border:0;border-radius:12px;padding:10px 22px;cursor:pointer;margin-top:8px}
-.report{display:none;margin:18px auto 0;max-width:460px;border:3px dashed var(--frame);border-radius:16px;padding:14px;text-align:center}
-.report textarea{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:var(--btn);border:1px solid var(--frame);border-radius:10px;padding:8px;resize:none}
-.code{font-size:1.7rem;font-weight:700;letter-spacing:2px;margin:4px 0 8px}
+.intro{text-align:center;padding:10px 0 4px}
+.intro h2{margin:0 0 12px;font-size:1.5rem}
+.intro input{font:inherit;font-size:1.3rem;padding:10px 14px;border:3px solid var(--accent);border-radius:12px;background:var(--field);color:var(--ink);width:min(280px,90%);text-align:center}
+.intro input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.big{font:inherit;font-weight:700;font-size:1.1rem;background:var(--ink);color:var(--card);border:0;border-radius:12px;padding:11px 26px;cursor:pointer;margin-top:12px}
+.big:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.err{color:var(--no);font-weight:700;min-height:1.3em;margin:8px 0 0}
+.hello{text-align:center;color:var(--soft);margin:0 0 14px}
+.saved{text-align:center;font-weight:700;color:var(--soft);min-height:1.3em;margin:6px 0 0}
 @media (max-width:620px){.grid{grid-template-columns:1fr}main{border-width:7px}}
 @media (prefers-reduced-motion:reduce){.choice button:hover{transform:none}}
 </style>
@@ -41,39 +46,76 @@ h1{text-align:center;font-size:1.8rem;margin:6px 0 4px}
 <body>
 <main>
 <h1>Συμπληρώνω τον ή των</h1>
+<section class="intro" id="intro">
+<h2>Πώς σε λένε;</h2>
+<input id="nameIn" maxlength="30" autocomplete="off" aria-label="Το όνομά σου" placeholder="Το όνομά σου">
+<br><button class="big" id="go">Ξεκίνα!</button>
+<p class="err" id="nameErr" aria-live="polite"></p>
+</section>
+<section id="play" hidden>
 <p class="lead">Πάτησε <b>τον</b> για έναν (ενικός) ή <b>των</b> για πολλούς (πληθυντικός, λέξεις σε <b>-ων</b>).</p>
+<p class="hello" id="hello"></p>
 <div class="grid" id="grid"></div>
 <p class="score" id="score" aria-live="polite"></p>
-<div class="report" id="report"><p><b>📝 Το δελτίο σου</b><br>Πάτησε «Αντιγραφή» και επικόλλησέ το στην απάντηση της εργασίας.</p><textarea id="repText" rows="7" readonly></textarea><p>Ή γράψε αυτόν τον κωδικό στην απάντηση:</p><div class="code" id="repCode"></div><button class="again" id="copyBtn" onclick="copyRep()">📋 Αντιγραφή</button></div>
-<div class="actions"><button class="again" id="again" hidden>Παίξε ξανά</button></div>
+<p class="saved" id="saved" aria-live="polite"></p>
+<div class="actions"><button class="big" id="again" hidden>Παίξε ξανά</button></div>
+</section>
 </main>
+<script src="config.js"></script>
 <script>
+const EX="τον ή των";
 const W=[["γιατρό","τον"],["χαλιών","των"],["πίνακα","τον"],["καφέ","τον"],["τροχό","τον"],["μελανιών","των"],["μολυβιών","των"],["βιβλίων","των"],["χαρτιών","των"],["χάρτη","τον"],["κάδο","τον"],["άνθρωπο","τον"],["σάκων","των"],["δάσκαλο","τον"],["χάρακα","τον"],["μπαμπά","τον"],["αετών","των"],["κυριών","των"],["μελιών","των"],["μάγειρα","τον"]];
-let done=0,right=0,attempt=0,first=null,start=0,wrong=[];
+let player="",attempt=0,t0=0;
+const $=id=>document.getElementById(id);
+try{player=localStorage.getItem("player")||""}catch(e){}
+$("nameIn").value=player;
+function begin(){
+ const n=$("nameIn").value.trim();
+ if(!n){$("nameErr").textContent="Γράψε πρώτα το όνομά σου.";$("nameIn").focus();return;}
+ player=n;try{localStorage.setItem("player",n)}catch(e){}
+ $("intro").hidden=true;$("play").hidden=false;$("hello").textContent="Καλή επιτυχία, "+n+"! 🍀";
+ build();
+}
+$("go").onclick=begin;
+$("nameIn").addEventListener("keydown",e=>{if(e.key==="Enter")begin();});
+function nextAttempt(){
+ const k="att_"+EX+"_"+player;let n=attempt;
+ try{n=parseInt(localStorage.getItem(k)||"0",10)||0;localStorage.setItem(k,String(n+1))}catch(e){}
+ return n+1;
+}
+function send(score,total,mistakes){
+ const s=Math.round((Date.now()-t0)/1000),st=$("saved");
+ if(typeof SHEET_URL==="undefined"||!String(SHEET_URL).startsWith("https://script.google.com")){
+  st.textContent="⚠️ Τα αποτελέσματα δεν αποθηκεύτηκαν (λείπει η σύνδεση με το Google Sheet).";return;}
+ st.textContent="Αποθήκευση…";
+ fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},
+  body:JSON.stringify({name:player,exercise:EX,attempt:attempt,score:score+"/"+total,
+   mistakes:mistakes.length?mistakes.join("; "):"κανένα",time:Math.floor(s/60)+"΄ "+(s%60)+"΄΄"})})
+ .then(()=>st.textContent="✔ Τα αποτελέσματα στάλθηκαν στη δασκάλα σου!")
+ .catch(()=>st.textContent="⚠️ Δεν στάλθηκαν. Έλεγξε τη σύνδεση στο internet και παίξε ξανά.");
+}
+let done=0,right=0,wrong=[];
 function build(){
- const g=document.getElementById("grid");g.innerHTML="";done=0;right=0;attempt++;start=Date.now();wrong=[];document.getElementById("report").style.display="none";
- document.getElementById("score").textContent="";document.getElementById("again").hidden=true;
+ const g=$("grid");g.innerHTML="";done=0;right=0;wrong=[];attempt=nextAttempt();t0=Date.now();
+ $("score").textContent="";$("saved").textContent="";$("again").hidden=true;
  W.forEach(([w,a])=>{
   const d=document.createElement("div");d.className="item";
   d.innerHTML=`<span class="slot">……</span><span class="word">${w}</span><span class="choice"><button>τον</button><button>των</button></span>`;
   const slot=d.querySelector(".slot"),ch=d.querySelector(".choice");
   ch.querySelectorAll("button").forEach(b=>b.onclick=()=>{
-   const ok=b.textContent===a;
-   slot.textContent=ok?a:a+" ✗";
-   d.classList.add(ok?"ok":"no");
-   if(!ok)slot.title="Η σωστή απάντηση είναι: "+a;
-   ch.remove();done++;if(ok)right++;else wrong.push(w);
-   if(done===W.length){document.getElementById("score").textContent=`Βρήκες ${right} από ${W.length} σωστά! ${right===W.length?"🏆":"👏"}`;document.getElementById("again").hidden=false;showReport("τον ή των",W.length);}
+   const pick=b.textContent,ok=pick===a;
+   slot.textContent=ok?a:a+" ✗";d.classList.add(ok?"ok":"no");
+   if(ok)right++;else wrong.push(w+" → "+pick);
+   ch.remove();done++;
+   if(done===W.length){
+    $("score").textContent=`Βρήκες ${right} από ${W.length} σωστά! ${right===W.length?"🏆":"👏"}`;
+    $("again").hidden=false;send(right,W.length,wrong);
+   }
   });
   g.appendChild(d);
  });
 }
-function showReport(name,total){if(first===null)first=right;const s=Math.round((Date.now()-start)/1000),d=new Date();
- document.getElementById("repText").value=`Άσκηση: ${name}\nΣκορ: ${right}/${total}\n1η προσπάθεια: ${first}/${total}\nΠροσπάθειες: ${attempt}\nΛάθη: ${wrong.length?wrong.join(", "):"κανένα"}\nΧρόνος: ${Math.floor(s/60)}΄ ${s%60}΄΄\nΗμερομηνία: ${d.toLocaleDateString("el-GR")}, ${d.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"})}`;
- document.getElementById("repCode").textContent=`${right}-${first}-${attempt}`;
- document.getElementById("copyBtn").textContent="📋 Αντιγραφή";document.getElementById("report").style.display="block";}
-function copyRep(){const t=document.getElementById("repText");t.select();try{navigator.clipboard.writeText(t.value)}catch(e){}try{document.execCommand("copy")}catch(e){}document.getElementById("copyBtn").textContent="Αντιγράφηκε! ✔";}
-document.getElementById("again").onclick=build;build();
+$("again").onclick=build;
 </script>
 </body>
 </html>
